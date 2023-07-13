@@ -53,7 +53,7 @@ $(document).ready(function() {
         const forecast = data.list[i];
         const forecastDate = moment(forecast.dt_txt).format('MMMM Do YYYY');
         const weatherIcon = `<img src="http://openweathermap.org/img/w/${forecast.weather[0].icon}.png" alt="Weather Icon">`;
-        const temperature = convertKelvinToCelsius(forecast.main.temp);
+        const temperature = convertKelvinToFahrenheit(forecast.main.temp);
         const humidity = forecast.main.humidity;
   
         const forecastCard = `
@@ -69,8 +69,8 @@ $(document).ready(function() {
       }
     }
   
-    function convertKelvinToCelsius(temp) {
-      return Math.round(temp - 273.15);
+    function convertKelvinToFahrenheit(temp) {
+      return Math.round((temp - 273.15) * 1.8 + 32);
     }
   });
   

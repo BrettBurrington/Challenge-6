@@ -25,7 +25,7 @@
 
   <main>
     <section id="current-weather">
-      <h2>Current Weather</h2>
+      <h2>Current Weather In</h2>
       <div id="current-city"></div>
       <div id="current-date"></div>
       <div id="current-icon"></div>
@@ -51,21 +51,19 @@
       // API key for OpenWeatherMap
       const apiKey = '1c204e3aa689d1ef5eda0fddc9ccbce1';
 
-      // Event listener for the search form submission
+    
       $('#search-form').on('submit', function(event) {
         event.preventDefault();
         const city = $('#city-input').val().trim();
 
-        // Clear the input field
         $('#city-input').val('');
 
         if (city !== '') {
-          // Fetch weather data for the entered city
+        
           getWeatherData(city);
         }
       });
 
-      // Function to fetch weather data for a given city
       function getWeatherData(city) {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
@@ -73,10 +71,10 @@
           url: apiUrl,
           method: 'GET'
         }).then(function(response) {
-          // Handle the response from the API
+       
           displayCurrentWeather(response);
 
-          // Fetch 5-day forecast data
+        
           const cityId = response.id;
           getForecastData(cityId);
         }).catch(function(error) {
@@ -84,7 +82,7 @@
         });
       }
 
-      // Function to fetch 5-day forecast data for a given city ID
+   
       function getForecastData(cityId) {
         const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`;
 
@@ -92,24 +90,22 @@
           url: apiUrl,
           method: 'GET'
         }).then(function(response) {
-          // Handle the response from the API
+        
           displayForecast(response);
         }).catch(function(error) {
           console.log('Error:', error.responseJSON.message);
         });
       }
 
-      // Function to display the current weather data
       function displayCurrentWeather(data) {
         $('#current-city').text(data.name);
         $('#current-date').text(moment().format('MMMM Do YYYY'));
         $('#current-icon').html(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="Weather Icon">`);
-        $('#current-temp').text(`Temperature: ${convertKelvinToCelsius(data.main.temp)}°C`);
+        $('#current-temp').text(`Temperature: ${convertKelvinToFahrenheit(data.main.temp)}°F`);
         $('#current-humidity').text(`Humidity: ${data.main.humidity}%`);
         $('#current-wind-speed').text(`Wind Speed: ${data.wind.speed} m/s`);
       }
 
-      // Function to display the 5-day forecast data
       function displayForecast(data) {
         $('#forecast-container').empty();
 
@@ -122,7 +118,7 @@
               <div class="forecast-icon">
                 <img src="http://openweathermap.org/img/w/${forecast.weather[0].icon}.png" alt="Weather Icon">
               </div>
-              <div class="forecast-temp">Temperature: ${convertKelvinToCelsius(forecast.main.temp)}°C</div>
+              <div class="forecast-temp">Temperature: ${convertKelvinToFahrenheit(forecast.main.temp)}°F</div>
               <div class="forecast-humidity">Humidity: ${forecast.main.humidity}%</div>
             </div>
           `;
@@ -131,9 +127,8 @@
         }
       }
 
-      // Function to convert temperature from Kelvin to Celsius
-      function convertKelvinToCelsius(temp) {
-        return Math.round(temp - 273.15);
+      function convertKelvinToFahrenheit(temp) {
+    return Math.round((temp - 273.15) * 1.8 +32);
       }
     });
   </script>

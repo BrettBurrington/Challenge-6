@@ -1,4 +1,5 @@
 /* Reset default browser styles */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -67,11 +68,11 @@
   }
   
   section {
-    background-color: #fff;
+    background-color: #6e6e6e;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(75, 36, 216, 0.1);
   }
   
   #current-weather {
@@ -84,6 +85,8 @@
   #current-city {
     font-size: 24px;
     margin-bottom: 10px;
+    margin-left: 15px;
+    
   }
   
   #current-date,
@@ -92,6 +95,7 @@
   #current-humidity,
   #current-wind-speed {
     margin-bottom: 10px;
+    margin-left: 15px;
   }
   
   #forecast-container {
@@ -105,10 +109,10 @@
     margin-bottom: 20px;
     padding: 10px;
     text-align: center;
-    background-color: #f9f9f9;
+    background-color: #000000;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.9);
+    border: 3px solid #03fd03;
   }
   
   .forecast-date {
