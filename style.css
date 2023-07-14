@@ -49,7 +49,7 @@
   
   button[type="submit"] {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #00a2ff;
     border: none;
     border-radius: 0 4px 4px 0;
     color: #fff;
@@ -72,7 +72,7 @@
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(75, 36, 216, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   #current-weather {
@@ -112,7 +112,7 @@
     background-color: #9b9b9b;
     border-radius: 4px;
     box-shadow: 0 6px 12px rgba(167, 167, 167, 0.9);
-    border: 3px solid #03fd03;
+    border: 3px solid #00a2ff;
   }
   
   .forecast-date {
@@ -161,4 +161,5 @@
       width: 100%;
     }
   }
+  
   
