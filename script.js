@@ -91,7 +91,7 @@ $(document).ready(function() {
         <div class="forecast-card">
           <div class="forecast-date">${forecastDate}</div>
           <div class="forecast-icon">${weatherIcon}</div>
-          <div class="forecast-temp">Temperature: ${temperature}°C</div>
+          <div class="forecast-temp">Temperature: ${temperature}°F</div>
           <div class="forecast-humidity">Humidity: ${humidity}%</div>
         </div>
       `;
