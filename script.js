@@ -1,18 +1,23 @@
 $(document).ready(function() {
-  // API key for OpenWeatherMap
-  const apiKey = 'c204e3aa689d1ef5eda0fddc9ccbce1';
+
+  const apiKey = '1c204e3aa689d1ef5eda0fddc9ccbce1';
+ displaySearchHistory();
+
 
   // Event listener for the search form submission
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
     const city = $('#city-input').val().trim();
 
-    // Clear the input field
+   
     $('#city-input').val('');
 
     if (city !== '') {
       getCoordinates(city);
+      getWeatherData(city)
+
     }
+    
   });
 
   function getCoordinates(city) {
@@ -42,6 +47,31 @@ $(document).ready(function() {
       method: 'GET'
     }).then(function(response) {
       displayForecastData(response);
+    }).catch(function(error) {
+      console.log('Error:', error.responseJSON.message);
+    });
+  }
+  function displayCurrentWeather(data) {
+    $('#current-city').text(data.name);
+    $('#current-date').text(moment().format('MMMM Do YYYY'));
+    $('#current-icon').html(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="Weather Icon">`);
+    $('#current-temp').text(`Temperature: ${convertKelvinToFahrenheit(data.main.temp)}°F`);
+    $('#current-humidity').text(`Humidity: ${data.main.humidity}%`);
+    $('#current-wind-speed').text(`Wind Speed: ${data.wind.speed} m/s`);
+  }
+  function getWeatherData(city) {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+    $.ajax({
+      url: apiUrl,
+      method: 'GET'
+    }).then(function(response) {
+      displayCurrentWeather(response);
+
+      const cityId = response.id;
+      getForecastData(cityId);
+
+    
     }).catch(function(error) {
       console.log('Error:', error.responseJSON.message);
     });
@@ -91,12 +121,18 @@ $(document).ready(function() {
     const searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
     if (searchHistory) {
       searchHistory.forEach(function(city) {
-        const historyItem = `<li>${city}</li>`;
+        //const historyItem = `<button>${city}</button>`;
+        const historyItem = $( `<button>${city}</button>`)
+        historyItem.on("click",function(){
+          getCoordinates(city);
+          getWeatherData(city)
+    
+        })
         $('#history-list').append(historyItem);
       });
     }
   }
 
-  // Display the initial search history
-  displaySearchHistory();
-});
+  
+})
+
